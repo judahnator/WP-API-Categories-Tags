@@ -17,9 +17,9 @@ add_action('rest_api_init',function() {
 		)
 	);
 });
-function e_get_category( $object, $field_name, $request ) {
-	return wp_get_post_categories( $object['id']);
+function e_get_category($object,$field_name,$request) {
+	return wp_get_post_categories($object['id']);
 }
-function e_update_category( $value, $object, $field_name ) {
+function e_update_category($value,$object,$field_name) {
 	return;
 }
