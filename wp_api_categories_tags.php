@@ -32,7 +32,7 @@ function e_update_categories($value,$object,$field_name) {
 	return;
 }
 function e_get_tags($object,$field_name,$request) {
-	return;
+	return wp_get_post_tags($object['id']);
 }
 function e_update_tags($value,$object,$field_name) {
 	return;
