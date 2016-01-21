@@ -9,17 +9,31 @@
 
 add_action('rest_api_init',function() {
 	register_rest_field('post',
-		'e_category',
+		'e_categories',
 		array(
-			'get_callback'    => 'e_get_category',
-			'update_callback' => 'e_update_category',
+			'get_callback'    => 'e_get_categories',
+			'update_callback' => 'e_update_categories',
+			'schema'          => null,
+		)
+	);
+	register_rest_field('post',
+		'e_tags',
+		array(
+			'get_callback'    => 'e_get_tags',
+			'update_callback' => 'e_update_tags',
 			'schema'          => null,
 		)
 	);
 });
-function e_get_category($object,$field_name,$request) {
+function e_get_categories($object,$field_name,$request) {
 	return wp_get_post_categories($object['id']);
 }
-function e_update_category($value,$object,$field_name) {
+function e_update_categories($value,$object,$field_name) {
+	return;
+}
+function e_get_tags($object,$field_name,$request) {
+	return;
+}
+function e_update_tags($value,$object,$field_name) {
 	return;
 }
