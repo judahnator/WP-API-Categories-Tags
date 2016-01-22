@@ -2,7 +2,7 @@
 /*
  Plugin Name: WP API Categories+Tags
  Plugin URI: http://servercanyon.com
- Description: This plugin allows users to create and view posts via the REST API, and include categories and posts in the query and response
+ Description: This plugin allows users to post, submit, and view tags and categories in the WordPress REST API
  Author: judahnator
  Author URI: http://servercanyon.com/
  */
