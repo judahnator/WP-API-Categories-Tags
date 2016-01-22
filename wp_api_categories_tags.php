@@ -14,4 +14,7 @@ if (!defined('CT_DIR')) {
 add_action('rest_api_init',function() {
 	require_once CT_DIR."/posts.class.php";
 	$ct_posts = new ct_posts;
+	
+	require_once CT_DIR."/endpoints.class.php";
+	$ct_endpoints = new ct_endpoints;
 });
