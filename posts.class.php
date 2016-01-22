@@ -22,7 +22,12 @@ class ct_posts {
 	}
 	
 	function ct_get_categories($object,$field_name,$request) {
-		return wp_get_post_categories($object['id']);
+		$return = array();
+		$post_categories = wp_get_post_categories($object['id']);
+		foreach ($post_categories as $category) {
+			$return[] = get_category($category);
+		}
+		return $return;
 	}
 	function ct_update_categories($categories,$object,$field_name) {
 		if (empty($categories) || !$categories) {
