@@ -30,7 +30,6 @@ class ct_endpoints {
 	}
 	
 	public function e_categories(WP_REST_Request $request) {
-		// TODO this
 		if (empty($request->get_param("id"))) {
 			return get_categories();
 		}else {
@@ -43,7 +42,6 @@ class ct_endpoints {
 		}
 	}
 	public function e_tags(WP_REST_Request $request) {
-		// TODO this
 		if (empty($request->get_param("id"))) {
 			return get_tags();
 		}
