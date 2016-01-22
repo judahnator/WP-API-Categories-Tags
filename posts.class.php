@@ -5,7 +5,7 @@ class ct_posts {
 	private $categories;
 	
 	public function __construct() {
-		$this->categories = array();
+		$this->categories = get_categories();
 		register_rest_field('post',
 			'e_categories',
 			array(
@@ -34,11 +34,25 @@ class ct_posts {
 	}
 	
 	public function ct_update_categories($categories,$object,$field_name) {
-		wp_mail("judah@thosetechguys.org","debug info",serialize(array("object"=>$object,"categories"=>$categories)));
+		//wp_mail("judah@thosetechguys.org","debug info",serialize(array("object"=>$object,"categories"=>$categories)));
 		if (empty($categories) || !$categories) {
 			return;
 		}
-		return wp_set_post_categories($object->ID,$categories);
+		if (is_string($categories)) {
+			$categories = explode(",",$categories);
+		}elseif (is_object($categories)) {
+			$categories = (array) $categories;
+		}
+		$input_categories = array();
+		foreach ($categories as $category) {
+			$cat_check = $this->category_id($category);
+			if ($cat_check === false) {
+				return;
+			}else {
+				$input_categories[] = $cat_check;
+			}
+		}
+		return wp_set_post_categories($object->ID,$input_categories);
 	}
 	
 	public function ct_get_tags($object,$field_name,$request) {
@@ -58,28 +72,21 @@ class ct_posts {
 	 * @param unknown $category
 	 */
 	private function category_id($category=NULL) {
-		if (empty($this->categories)) {
-			$this->categories = get_categories();
-		}
 		if (is_null($category)) {
 			return false;
 		}
 		foreach ($this->categories as $cat_data) { // if category is name or slug
-			if ($category == $cat_data['name'] || $category == $cat_data['slug']) {
-				return $cat_data['term_id'];
+			if ($category == $cat_data->name || $category == $cat_data->slug) {
+				return $cat_data->term_id;
 			}
 		}
 		foreach ($this->categories as $cat_data) { // if category is ID of category
-			if ($category == $cat_data['term_id']) {
-				return $cat_data['term_id'];
+			if ($category == $cat_data->term_id) {
+				return $cat_data->term_id;
 			}
 		}
-		$new_category = wp_create_category($category);
-		if ($new_category === 0) {
-			return false;
-		}else {
-			return $new_category;
-		}
+		$new_category = wp_insert_term($category,"category");
+		return $new_category['term_id'];
 	}
 	
 }
