@@ -22,6 +22,7 @@ This is so if the WordPress team eventually supports this functionality, this pl
 
 == Installation ==
 
+1. Double check you have the WordPress REST (v2) API installed and active
 1. Upload the plugin folder to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
 
