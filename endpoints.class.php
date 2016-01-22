@@ -30,11 +30,12 @@ class ct_endpoints {
 	}
 	
 	public function e_categories(WP_REST_Request $request) {
-		if (empty($request->get_param("id"))) {
+		$id = $request->get_param("id");
+		if (empty($id)) {
 			return get_categories();
 		}else {
 			$return = array();
-			$post_categories = wp_get_post_categories($request->get_param("id"));
+			$post_categories = wp_get_post_categories($id);
 			foreach ($post_categories as $category) {
 				$return[] = get_category($category);
 			}
