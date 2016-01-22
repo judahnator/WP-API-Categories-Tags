@@ -24,8 +24,11 @@ class ct_posts {
 	function ct_get_categories($object,$field_name,$request) {
 		return wp_get_post_categories($object['id']);
 	}
-	function ct_update_categories($value,$object,$field_name) {
-		return;
+	function ct_update_categories($categories,$object,$field_name) {
+		if (empty($categories) || !$categories) {
+			return;
+		}
+		return wp_set_post_categories($object->ID,$categories);
 	}
 	function ct_get_tags($object,$field_name,$request) {
 		return wp_get_post_tags($object['id']);
