@@ -43,9 +43,10 @@ class ct_endpoints {
 		}
 	}
 	public function e_tags(WP_REST_Request $request) {
-		if (empty($request->get_param("id"))) {
+		$id = $request->get_param("id");
+		if (empty($id)) {
 			return get_tags();
 		}
-		return wp_get_post_tags($request->get_param("id"));
+		return wp_get_post_tags($id);
 	}
 }
